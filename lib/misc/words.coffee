@@ -14,6 +14,6 @@ module.exports =
     # and it duplicates the efforts from atom-language-julia. It might be better
     # to select the current word via finding the smallest <span> containing the
     # cursor which also has `function` or `macro` as its class.
-    range = cursor.getCurrentWordBufferRange({wordRegex: /[\u00A0-\uFFFF\w_!´\.]*@?[\u00A0-\uFFFF\w_!´]+/})
+    range = cursor.getCurrentWordBufferRange({wordRegex: /[\u00A0-\uFFFF\w_!´]*\.?@?[\u00A0-\uFFFF\w_!´]+/})
     word = editor.getTextInBufferRange range
     [word, range]

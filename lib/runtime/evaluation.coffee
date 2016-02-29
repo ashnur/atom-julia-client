@@ -49,7 +49,8 @@ module.exports =
   gotoSymbol: ->
     @withCurrentContext ({editor, mod}) =>
       words.withWord editor, (word, range) =>
-        client.rpc("methods", {word: word, mod: mod}).then (result) => # 149
+        client.rpc("methods", {word: word, mod: mod}).then (result) => 
+          @ink.goto.goto result
 
   toggleDocs: ->
     @withCurrentContext ({editor, mod}) =>
