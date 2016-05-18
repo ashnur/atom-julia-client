@@ -55,10 +55,9 @@ module.exports =
     @withCurrentContext ({editor, mod}) =>
       words.withWord editor, (word, range) =>
         client.rpc("docs", {word: word, mod: mod}).then (result) =>
-          error = result.type == 'error'
-          view = if error then result.view else result
+          if result.error then return
           d = new @ink.InlineDoc editor, range,
-            content: views.render view
+            content: views.render result
             highlight: true
           d.view.classList.add 'julia'
 
