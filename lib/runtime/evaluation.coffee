@@ -54,7 +54,7 @@ module.exports =
   toggleDocs: ->
     @withCurrentContext ({editor, mod}) =>
       words.withWord editor, (word, range) =>
-        client.rpc("docs", {word: word, mod: mod}).then ({result}) =>
+        client.rpc("docs", {word: word, mod: mod}).then (result) =>
           error = result.type == 'error'
           view = if error then result.view else result
           d = new @ink.InlineDoc editor, range,
