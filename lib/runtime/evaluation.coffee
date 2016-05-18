@@ -49,7 +49,7 @@ module.exports =
   gotoSymbol: ->
     @withCurrentContext ({editor, mod}) =>
       words.withWord editor, (word, range) =>
-        @ink.goto.goto client.rpc("methods", {word: word, mod: mod})
+        client.rpc("methods", {word: word, mod: mod}).then (result) => # 149
 
   toggleDocs: ->
     @withCurrentContext ({editor, mod}) =>
@@ -57,9 +57,10 @@ module.exports =
         client.rpc("docs", {word: word, mod: mod}).then ({result}) =>
           error = result.type == 'error'
           view = if error then result.view else result
-          new @ink.InlineDoc editor, range,
+          d = new @ink.InlineDoc editor, range,
             content: views.render view
             highlight: true
+          d.view.classList.add 'julia'
 
   showError: (r, lines) ->
     @errorLines?.lights.destroy()
